@@ -19,11 +19,11 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">Sparse matrices, in pure Go.<br><span class="accent">Solvers that count iterations like SciPy.</span></h1>
-      <p class="sub">go-sparse is the sparse linear algebra layer of the Go scientific stack built on <b>go-ndarray</b>: <b>sparse formats</b>, <b>fill-reducing orderings</b> and <b>iterative solvers</b> with preconditioners, following <code>scipy.sparse.linalg</code>. Its tests replay <b>recorded SciPy answers</b>. No cgo. It is in development and not yet released; what is not provided yet (sparse direct factorisations, eigensolvers, multigrid) is said in the documentation.</p>
+      <p class="sub">go-sparse is the sparse linear algebra layer of the Go scientific stack built on <b>go-ndarray</b>: <b>sparse formats</b>, <b>fill-reducing orderings</b> and <b>iterative solvers</b> with preconditioners, following <code>scipy.sparse.linalg</code>. Its tests replay <b>recorded SciPy answers</b>. No cgo. <b>sparse v0.1.0</b> is released; what is not provided yet (sparse direct factorisations, eigensolvers, multigrid) is said in the documentation.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://go-sparse.github.io/docs/">{{ partial "icons/book.html" . }}Read the documentation →</a>
       </div>
-      <div class="trust"><span><b>CG, GMRES, MINRES, LSQR, LSMR</b> iteration counts equal SciPy's</span><span><b>100%</b> statement coverage</span></div>
+      <div class="trust"><span><b>CG, GMRES, MINRES, LSQR, LSMR</b> iteration counts equal SciPy's</span><span><b>0.56–0.98×</b> SciPy's time on one core</span><span><b>100%</b> statement coverage</span></div>
     </div>
     <div class="term" id="example">
       <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">main.go</span></div>
@@ -36,7 +36,7 @@ fmt.Println(res.Info, res.Iterations)        // 0 = converged, as in SciPy</pre>
   </div></div>
 
   <div class="strip"><div class="wrap">
-    <span class="lead-line">{{ len .Site.Params.repos }} repositories — <b>one library</b>, in development: <code>github.com/go-sparse/sparse</code></span>
+    <span class="lead-line">{{ len .Site.Params.repos }} repositories — <b>one library</b>, released v0.1.0: <code>go get github.com/go-sparse/sparse@v0.1.0</code></span>
     <div class="mods">{{ range .Site.Params.repos }}<a href="{{ .href }}">{{ .name }}</a>{{ end }}</div>
   </div></div>
 
@@ -58,7 +58,7 @@ fmt.Println(res.Info, res.Iterations)        // 0 = converged, as in SciPy</pre>
   <section id="exact" style="padding-top:10px"><div class="wrap">
     <span class="eyebrow">What is checked</span>
     <h2>{{ len .Site.Params.checks }} kinds of check, each <i>against a recorded answer</i>.</h2>
-    <p class="lead">The fixtures are written by a Go harness that calls SciPy 1.18.1, committed, and compared in the tests. The performance table is not measured yet: the development host was too loaded to measure honestly, and the documentation says so rather than show an empty cell as a result.</p>
+    <p class="lead">The fixtures are written by a Go harness that calls SciPy 1.18.1, committed, and compared in the tests. The performance table is in the library's <code>docs/perf.md</code> and the documentation, measured against SciPy on one core.</p>
     <div class="grid">
       {{ range .Site.Params.checks }}
       <div class="card"><h3>{{ .name }}</h3><p>{{ .what | markdownify }}</p></div>
