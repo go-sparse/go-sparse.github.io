@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ .Site.Title }} — sparse matrices and solvers in pure Go</title>
+<meta name="description" content="{{ .Site.Params.description }}">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+{{ partial "styles.html" . }}
+</head>
+<body class="lm">
+  <header class="nav"><div class="wrap">
+    <a class="brand" href="/"><img class="glyph" src="/img/logo.svg" width="32" height="32" alt="go-sparse logo"> {{ .Site.Title }}</a>
+    <nav><a href="#example">Example</a><a href="#features">Why</a><a href="#exact">Checks</a><a href="#repos">Repositories</a></nav>
+    {{ partial "theme-toggle.html" . }}
+  </div></header>
+  {{ partial "fork-ribbon.html" "https://github.com/go-sparse" }}
+
+  <div class="hero"><div class="wrap">
+    <div>
+      <h1 class="head">Sparse matrices, in pure Go.<br><span class="accent">Solvers that count iterations like SciPy.</span></h1>
+      <p class="sub">go-sparse is the sparse linear algebra layer of the Go scientific stack built on <b>go-ndarray</b>: <b>sparse formats</b>, <b>fill-reducing orderings</b> and <b>iterative solvers</b> with preconditioners, following <code>scipy.sparse.linalg</code>. Its tests replay <b>recorded SciPy answers</b>. No cgo. <b>sparse v0.1.0</b> is released; what is not provided yet (sparse direct factorisations, eigensolvers, multigrid) is said in the documentation.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://go-sparse.github.io/docs/">{{ partial "icons/book.html" . }}Read the documentation →</a>
+      </div>
+      <div class="trust"><span><b>CG, GMRES, MINRES, LSQR, LSMR</b> iteration counts equal SciPy's</span><span><b>0.56–0.98×</b> SciPy's time on one core</span><span><b>100%</b> statement coverage</span></div>
+    </div>
+    <div class="term" id="example">
+      <div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span class="t">main.go</span></div>
+<pre style="white-space:pre;overflow-x:auto;tab-size:4">a := gallery.Laplacian2D(100, 100)           // *sparse.CSR[float64]
+b := make([]float64, a.Rows)
+ic, _ := iter.NewIC0(a)                      // incomplete Cholesky
+res, _ := iter.CG(a, b, &amp;iter.Options{RTol: 1e-8, M: ic})
+fmt.Println(res.Info, res.Iterations)        // 0 = converged, as in SciPy</pre>
+    </div>
+  </div></div>
+
+  <div class="strip"><div class="wrap">
+    <span class="lead-line">{{ len .Site.Params.repos }} repositories — <b>one library</b>, released v0.1.0: <code>go get github.com/go-sparse/sparse@v0.1.0</code></span>
+    <div class="mods">{{ range .Site.Params.repos }}<a href="{{ .href }}">{{ .name }}</a>{{ end }}</div>
+  </div></div>
+
+  <section id="features"><div class="wrap">
+    <span class="eyebrow">Why go-sparse</span>
+    <h2>What <i>scipy.sparse</i> gives, in Go.</h2>
+    <p class="lead">Each package names the reference it corresponds to: SciPy's <code>scipy.sparse</code> and <code>scipy.sparse.linalg</code>, MATLAB's sparse functions, and SuiteSparse AMD and COLAMD as the reference algorithms for the orderings.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">▦</div><h3>Sparse formats</h3><p>COO, CSR, CSC and DOK over float64 and complex128; conversions, O(1) transpose, SpMV, SpMM, SpGEMM, <code>Diags</code>, <code>Tril</code>, <code>Triu</code> and norms.</p></div>
+      <div class="card"><div class="ico">⇄</div><h3>Orderings</h3><p>RCM, AMD and COLAMD, with bandwidth, profile and Cholesky and QR fill counts to compare them.</p></div>
+      <div class="card"><div class="ico">↻</div><h3>Iterative solvers</h3><p>CG, GMRES(m), BiCGSTAB, MINRES, LSQR and LSMR, with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, on any <code>LinearOperator</code>.</p></div>
+      <div class="card"><div class="ico">📄</div><h3>Matrix Market</h3><p>Read and write coordinate and array files, real, integer, pattern and complex, with limits against hostile input.</p></div>
+      <div class="card"><div class="ico">🧮</div><h3>On go-ndarray</h3><p>The <code>nd</code> package takes and returns <code>*ndarray.Array</code> for vectors, dense matrices, SpMV and SpMM.</p></div>
+      <div class="card"><div class="ico">📦</div><h3>Pure Go, CGO=0</h3><p>No cgo. CI runs the tests with the race detector, on 386 and the other architectures of the fleet.</p></div>
+      <div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>Every repository of the organization. The orderings are written from the papers; GPL and LGPL code was not consulted.</p></div>
+    </div>
+  </div></section>
+
+  <section id="exact" style="padding-top:10px"><div class="wrap">
+    <span class="eyebrow">What is checked</span>
+    <h2>{{ len .Site.Params.checks }} kinds of check, each <i>against a recorded answer</i>.</h2>
+    <p class="lead">The fixtures are written by a Go harness that calls SciPy 1.18.1, committed, and compared in the tests. The performance table is in the library's <code>docs/perf.md</code> and the documentation, measured against SciPy on one core.</p>
+    <div class="grid">
+      {{ range .Site.Params.checks }}
+      <div class="card"><h3>{{ .name }}</h3><p>{{ .what | markdownify }}</p></div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="repos" style="padding-top:20px"><div class="wrap">
+    <span class="eyebrow">Repositories</span>
+    <h2>What is here.</h2>
+    <div class="road">
+      {{ range .Site.Params.repos }}
+      <div class="ph">
+        <div class="top"><h4><a href="{{ .href }}">{{ .name }}</a></h4><span class="tag active">{{ .kind }}</span></div>
+        <p>{{ .blurb | safeHTML }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div></section>
+
+  <section id="eco" style="padding-top:6px"><div class="wrap">
+    <div class="band">
+      <h2>Sparse linear algebra for the Go scientific stack.</h2>
+      <p>go-sparse works with the arrays of <a href="https://github.com/go-ndarray/ndarray"><u>go-ndarray</u></a>, next to <a href="https://github.com/go-numerics"><u>go-numerics</u></a> and <a href="https://github.com/go-statistics"><u>go-statistics</u></a>, and a <a href="https://github.com/go-notebook/notebook"><u>go-notebook</u></a> cell can use all of them. What is not provided yet is listed in the <a href="https://go-sparse.github.io/docs/"><u>documentation</u></a>.</p>
+      <a class="btn btn-ghost" href="https://github.com/go-sparse">{{ partial "icons/github.html" . }}Read the source on GitHub →</a>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><span>go-sparse · <a href="https://github.com/go-sparse">go-sparse on GitHub</a> · BSD-3-Clause</span><span>mostly zeros · all the structure</span></div></footer>
+</body>
+</html>
