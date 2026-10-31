@@ -22,12 +22,12 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
 # strip under the hero). A field nothing renders does not stay true.
 # A status says "released vX.Y.Z" only when a tag exists; otherwise
 # "in development" and the pull request that matters.
-# sparse: tag v0.1.0 exists (checked with gh api repos/go-sparse/sparse/tags).
+# sparse: tag v0.2.0 exists (checked with gh api repos/go-sparse/sparse/tags).
 [[params.repos]]
   name  = "sparse"
-  kind  = "library · released v0.1.0"
+  kind  = "library · released v0.2.0"
   href  = "https://github.com/go-sparse/sparse"
-  blurb = "Released v0.1.0. COO, CSR, CSC and DOK matrices over float64 and complex128, Matrix Market I/O, the RCM, AMD and COLAMD orderings, and the iterative solvers CG, GMRES, BiCGSTAB, MINRES, LSQR and LSMR with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, following <code>scipy.sparse.linalg</code>."
+  blurb = "Released v0.2.0. COO, CSR, CSC and DOK matrices over float64 and complex128, Matrix Market I/O, the RCM, AMD and COLAMD orderings, a sparse LDLᵀ for quasi-definite matrices (a port of QDLDL), and the iterative solvers CG, GMRES, BiCGSTAB, MINRES, LSQR and LSMR with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, following <code>scipy.sparse.linalg</code>."
 [[params.repos]]
   name  = "docs"
   kind  = "site"
@@ -40,7 +40,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   blurb = "Logos and icons for the organization, in SVG / PNG / JPG / ICO / ICNS across colour, white and black variants."
 
 # The cards of #exact and their count come from this list. Each statement is
-# from the README of the library it names (sparse, v0.1.0).
+# from the README of the library it names (sparse, v0.2.0).
 [[params.checks]]
   name = "Iteration counts equal SciPy's"
   what = "CG, GMRES, MINRES, LSQR and LSMR take the same number of iterations as SciPy 1.18.1 on the committed suite; BiCGSTAB agrees within a few iterations. The stopping rule, `rtol`, `maxiter` and `info` follow `scipy.sparse.linalg`. (sparse)"
