@@ -20,6 +20,6 @@ hugo server
 | `links.yml` | every link and image of the built site resolves |
 
 The status of each package on the page is the truth at the time of writing:
-`sparse` is released as v0.1.0 (the latest tag of go-sparse/sparse).
+`sparse` is released as v0.2.0 (the latest tag of go-sparse/sparse).
 
 BSD-3-Clause.
