@@ -27,7 +27,7 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   name  = "sparse"
   kind  = "library · released v0.2.0"
   href  = "https://github.com/go-sparse/sparse"
-  blurb = "Released v0.2.0. COO, CSR, CSC and DOK matrices over float64 and complex128, Matrix Market I/O, the RCM, AMD and COLAMD orderings, a sparse LDLᵀ for quasi-definite matrices (a port of QDLDL), and the iterative solvers CG, GMRES, BiCGSTAB, MINRES, LSQR and LSMR with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, following <code>scipy.sparse.linalg</code>."
+  blurb = "Released v0.2.1. COO, CSR, CSC and DOK matrices over float64 and complex128, Matrix Market I/O, the RCM, AMD and COLAMD orderings, a sparse LDLᵀ for quasi-definite matrices (a port of QDLDL), and the iterative solvers CG, GMRES, BiCGSTAB, MINRES, LSQR and LSMR with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, following <code>scipy.sparse.linalg</code>."
 [[params.repos]]
   name  = "docs"
   kind  = "site"
