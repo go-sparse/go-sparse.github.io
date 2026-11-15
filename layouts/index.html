@@ -19,10 +19,9 @@
   <div class="hero"><div class="wrap">
     <div>
       <h1 class="head">Sparse matrices, in pure Go.<br><span class="accent">Solvers that count iterations like SciPy.</span></h1>
-      <p class="sub">go-sparse is the sparse linear algebra layer of the Go scientific stack built on <b>go-ndarray</b>: <b>sparse formats</b>, <b>fill-reducing orderings</b> and <b>iterative solvers</b> with preconditioners, following <code>scipy.sparse.linalg</code>. Its tests replay <b>recorded SciPy answers</b>. No cgo. <b>sparse v0.3.0</b> is released, with a <b>sparse LDLᵀ</b> for quasi-definite matrices (a port of QDLDL, on par with the C original on long columns and 11 to 21% behind it on AMD-ordered KKT matrices as of v0.2.1, measured and documented) and an <b>allocation-free AMD and symbolic phase</b> on a reusable workspace; what is not provided yet (sparse LU, Cholesky and QR, eigensolvers, multigrid) is said in the documentation.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="https://go-sparse.github.io/docs/">{{ partial "icons/book.html" . }}Read the documentation →</a>
-      </div>
+      <p class="sub">go-sparse is the sparse linear algebra layer of the Go scientific stack built on <b>go-ndarray</b>: <b>sparse formats</b>, <b>fill-reducing orderings</b> and <b>iterative solvers</b> with preconditioners, following <code>scipy.sparse.linalg</code>. Its tests replay <b>recorded SciPy answers</b>. {{ if not (partial "mantra-on.html" $) }}No cgo{{ end }}. <b>sparse v0.3.0</b> is released, with a <b>sparse LDLᵀ</b> for quasi-definite matrices (a port of QDLDL, on par with the C original on long columns and 11 to 21% behind it on AMD-ordered KKT matrices as of v0.2.1, measured and documented) and an <b>allocation-free AMD and symbolic phase</b> on a reusable workspace; what is not provided yet (sparse LU, Cholesky and QR, eigensolvers, multigrid) is said in the documentation.</p>
+      {{/* [[params.cta]] in hugo.toml: the kit renders the row */}}
+      {{ partial "cta.html" . }}
       <div class="trust"><span><b>CG, GMRES, MINRES, LSQR, LSMR</b> iteration counts equal SciPy's</span><span><b>0.56–0.98×</b> SciPy's time on one core</span><span><b>100%</b> statement coverage</span></div>
     </div>
     <div class="term" id="example">
@@ -50,8 +49,8 @@ fmt.Println(res.Info, res.Iterations)        // 0 = converged, as in SciPy</pre>
       <div class="card"><div class="ico">↻</div><h3>Iterative solvers</h3><p>CG, GMRES(m), BiCGSTAB, MINRES, LSQR and LSMR, with Jacobi, SSOR, IC0, ILU0 and ILUT preconditioners, on any <code>LinearOperator</code>.</p></div>
       <div class="card"><div class="ico">📄</div><h3>Matrix Market</h3><p>Read and write coordinate and array files, real, integer, pattern and complex, with limits against hostile input.</p></div>
       <div class="card"><div class="ico">🧮</div><h3>On go-ndarray</h3><p>The <code>nd</code> package takes and returns <code>*ndarray.Array</code> for vectors, dense matrices, SpMV and SpMM.</p></div>
-      <div class="card"><div class="ico">📦</div><h3>Pure Go, CGO=0</h3><p>No cgo. CI runs the tests with the race detector, on 386 and the other architectures of the fleet.</p></div>
-      <div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>Every repository of the organization. The orderings are written from the papers; GPL and LGPL code was not consulted.</p></div>
+      {{ if not (partial "mantra-on.html" $) }}<div class="card"><div class="ico">📦</div><h3>Pure Go, CGO=0</h3><p>{{ if not (partial "mantra-on.html" $) }}No cgo.{{ end }} CI runs the tests with the race detector, on 386 and the other architectures of the fleet.</p></div>{{ end }}
+      {{ if not (partial "mantra-on.html" $) }}<div class="card"><div class="ico">⚖️</div><h3>BSD-3-Clause</h3><p>Every repository of the organization. The orderings are written from the papers; GPL and LGPL code was not consulted.</p></div>{{ end }}
     </div>
   </div></section>
 
@@ -87,6 +86,6 @@ fmt.Println(res.Info, res.Iterations)        // 0 = converged, as in SciPy</pre>
     </div>
   </div></section>
 
-  <footer><div class="wrap"><span>go-sparse · <a href="https://github.com/go-sparse">go-sparse on GitHub</a> · BSD-3-Clause</span><span>mostly zeros · all the structure</span></div></footer>
+  <footer><div class="wrap"><span>go-sparse · <a href="https://github.com/go-sparse">go-sparse on GitHub</a>{{ if not (partial "mantra-on.html" $) }} · BSD-3-Clause{{ end }}</span><span>mostly zeros · all the structure</span></div></footer>
 </body>
 </html>

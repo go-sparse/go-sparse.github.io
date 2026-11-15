@@ -80,3 +80,13 @@ disableKinds = ['taxonomy', 'term', 'rss', 'sitemap', '404']
   chipFgDark = "#f2bfb6"
   statsEnd = "#f9e3df"
   bandText = "#fbecea"
+
+# The hero's buttons, rendered by landingkit's cta.html in the kit's order.
+[[params.cta]]
+  kind  = "docs"
+  href  = "https://go-sparse.github.io/docs/"
+  label = "Read the documentation →"
+
+# The architectures the tests RUN on, read from the library's CI.
+[params.mantra]
+  goarch = ["amd64", "arm64", "riscv64", "loong64", "ppc64le", "s390x", "arm"]
